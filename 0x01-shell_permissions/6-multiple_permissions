@@ -1,6 +1,2 @@
 #!/bin/bash
-<<<<<<< Updated upstream
 sudo chmod ug+x,o+r hello
-=======
-sudo chmod 114 hello
->>>>>>> Stashed changes
