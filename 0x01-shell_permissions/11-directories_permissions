@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chmod -d -d -d 111
+sudo chmod -d 155
