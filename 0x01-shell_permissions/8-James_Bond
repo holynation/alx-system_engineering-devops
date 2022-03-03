@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo ug-rwx,o=rwx hello
+sudo 007  hello
