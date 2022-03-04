@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chown vincent:staff --dereference
+sudo chown vincent:staff --from=CURRENT_OWNER:CURRENT_GROUP
