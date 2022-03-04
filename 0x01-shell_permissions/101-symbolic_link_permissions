@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo chown vincent:staff --from=CURRENT_OWNER:CURRENT_GROUP
+sudo chown -h vincent:staff _hello
