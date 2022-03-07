@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo head --lines=3  iacta
+sudo head -n 3  iacta | tail -n 1
