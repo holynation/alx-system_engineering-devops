@@ -1,2 +1,2 @@
 #!/bin/bash
-echo rpub ge 'a-mn-zA-MN-Z' 'n-mN-M'
+echo tr 'n-za-mN-ZA-M' 'a-zA-Z'
