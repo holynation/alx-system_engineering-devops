@@ -8,8 +8,8 @@ rm_file_exist()
     exit
 }
 trap "echo 'Y U no love me?!'" SIGINT
-trap "echo 'I hate the kill command'; rm_file_exit" SIGTERM
-trap "echo 'I hate the kill command'; rm_file_exit" SIGQUIT
+trap "echo 'I hate the kill command'; rm_file_exist" SIGTERM
+trap "echo 'I hate the kill command'; rm_file_exist" SIGQUIT
 
 
 echo $$ >> /var/run/myscript.pid
