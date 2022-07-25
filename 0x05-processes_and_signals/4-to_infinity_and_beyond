@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This script creates infinite loop that displays text with sleep 2
+# Press Ctrl-C to stop the execution of the script
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
