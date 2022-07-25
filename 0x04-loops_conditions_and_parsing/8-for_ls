@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# This lists content in current directory without initial #- in filenames
+# i.e Where only the part of the name after the first dash is displayed
+
+files="$(ls)"
+for f in $files;
+do
+    echo "$f" | cut -d "-" -f2
+done
