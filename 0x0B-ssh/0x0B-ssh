@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-shh ubuntu@3.215.177.71
+ssh ubuntu@3.215.177.71
 mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys
 chmod 700 ~/.ssh && chmod 600 ~/.ssh/authorized_keys
 echo ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDP3zOA0QS5HYdMHrGVqzIjuxK0jbCk6Zf9cmWce1Ndy9EZiA22PsTBuUdrNJtgstwTynXyUgIEoch7/M4pt4QDRXWfH+0UdAYKhGIV9gdF5O8NBs1WLNFgUVZ5qM3cIKf35I2mqkBVfTf3cMR0e128vAD948/qkTW4nrEniMd1Fopg0Cu/QawAZ+dKjaSHW0fDQFdnc1o40rldK3cVVEfKH3pEsJKyZM9AhTPubtJSbIb1qoEJlMYIauxKkC+go2AZxH2B6q+LOWQrhUnb+1Uyz+Ymqx5aZLD6fv06MddFSTlEvnqyB5LqY9+Z1DTjtigxXQPEIzKIo37fhrVUWGztiS+kQDM1T2LEg51OzZaOlJUToeQKHxzF/QgiWdi+E7iH69p0H+FKtw0e1HJxapMqSnLEXMtICbBg+dud6g7U8QcMhrzQDYI/dHRBXAtU2yvJywChW00BybYwek/9g4C+zph752XN+dUE8m4xCl039mziIMnTBpGBIxCvpJ9bgh1TfR51ne4acJ5qI+1LbQpsVsE3IvGFzaRdMR1XzhzwaN2psrc+ySlqfknZ0d9NBXORzHXFp+2wER6cegi6mkiK87qmwa+es+rtm0FsizUQwmIncQ1O2YP02bnvoblt5Jcr9G5DCuJhGnGGK9I6cMVmKWSU+SkZO6PT1kID8EGajQ== eco@eco-OptiPlex-3020 >> ~/.ssh/authorized_keys
