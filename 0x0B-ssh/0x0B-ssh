@@ -2,6 +2,4 @@
 # Write a Bash script that creates an RSA key pair having
 # name as 'school',bits as '4096', passphrase 'betty'
 
-<<<<<<< HEAD
-ssh-keygen -t rsa -b 4096 -C "school" -p betty
-
+ssh-keygen -t rsa -b 4096 -p betty -C "school"
