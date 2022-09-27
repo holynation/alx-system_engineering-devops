@@ -65,7 +65,7 @@ file { 'Nginx default config file':
                 root /var/www/html;
                 internal;
         }
-        add_header X-SERVED-BY $HOSTNAME
+        add_header X-Served-By $hostname
 }
 ",
 }
