@@ -51,6 +51,7 @@ file { 'Nginx default config file':
         index index.html index.htm index.nginx-debian.html;
         server_name _;
         location / {
+                add_header X-Served-By $hostname
                 # First attempt to serve request as file, then
                 # as directory, then fall back to displaying a 404.
                 try_files \$uri \$uri/ =404;
@@ -65,7 +66,6 @@ file { 'Nginx default config file':
                 root /var/www/html;
                 internal;
         }
-        add_header X-Served-By $hostname
 }
 ",
 }
