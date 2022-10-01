@@ -7,5 +7,8 @@
 #ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 #sudo service nginx restart
 
-sudo sed -i "s/sites-enabled/sites-available/" /etc/nginx/nginx.conf
-sudo service nginx restart
+#!/usr/bin/env bash
+# configures nginx to run and listen to port 80
+sed -i "s/8080/80/g" /etc/nginx/sites-enabled/default
+service nginx restart
+echo "" > /run/nginx.pid
