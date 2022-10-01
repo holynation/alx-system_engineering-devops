@@ -2,21 +2,18 @@
 # Configure server with: HAproxy version 1.5 or greater
 # Distributes request using roundrobin; sends traffic to servers: web-01 and web-02
 
-CFG="\\\n#HAproxy for web servers\nfrontend web-frontend\n\tbind *:80\n\tmode http\n\toption forwardfor\n\tdefault_backend web-backend\n\nbackend web-backend\n\tbalance roundrobin\n\tserver 19249-web-01 34.204.201.220:80 check\n\tserver 19249-web-02 35.170.76.215:80 check\n"
+# CFG="\\\n#HAproxy for web servers\nfrontend web-frontend\n\tbind *:80\n\tmode http\n\toption forwardfor\n\tdefault_backend web-backend\n\nbackend web-backend\n\tbalance roundrobin\n\tserver 19249-web-01 34.204.201.220:80 check\n\tserver 19249-web-02 35.170.76.215:80 check\n"
 
-# CONFIG="
-# #HAproxy for web servers
-# frontend web-frontend
-# 	bind *:80
-# 	mode http
-# 	option forwardfor
-# 	default_backend web-backend
-
-# backend web-backend
-# 	balance roundrobin
-# 	server 19249-web-01 34.204.201.220:80 check
-# 	server 19249-web-02 35.170.76.215:80 check
-# "
+CONFIG="
+  listen load_balancer
+	bind *:80
+	mode http
+	balance roundrobin
+  option httpclose
+  option forwardfor
+	server 19249-web-01 34.204.201.220:80 check
+	server 19249-web-02 35.170.76.215:80 check
+"
 
 sudo apt-get -y update
 sudo apt-get install --no-install-recommends software-properties-common
@@ -25,14 +22,14 @@ sudo apt-get install -y haproxy=2.4\*
 ufw allow 1344
 
 # Make sure HAproxy can be managed via an init script
-sudo sed -i "s/ENABLED=0/ENABLED=1/" /etc/default/haproxy
+echo "ENABLED=1" > /etc/default/haproxy
 
 # Backup original config file before attempt modifications
 sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.backup
 
 # Configure to include roundrobin and two servers
-sudo sed -i "\$a $CFG" /etc/haproxy/haproxy.cfg
+# sudo sed -i "\$a $CFG" /etc/haproxy/haproxy.cfg
 
-# printf "%s" "$CONFIG" >> /etc/haproxy/haproxy.cfg
+printf "%s" "$CONFIG" >> /etc/haproxy/haproxy.cfg
 
 sudo service haproxy restart
