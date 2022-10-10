@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Installs firewall; block all incoming except 22, 443, 80
+# https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
+
+# install ufw, support both IPv4 and IPv6, and ensure default values
+sudo apt-get -y install ufw
+sudo sed -i "s/IPV6=no/IPV6=yes/" /etc/default/ufw
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+
+# configure
+sudo ufw allow ssh
+sudo ufw allow OpenSSH
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow "Nginx Full"
+
+# start
+sudo ufw enable
