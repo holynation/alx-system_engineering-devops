@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Bash scipt that uses ssh to connect to a server
 
-ssh -i ~/.ssh/school ubuntu@3.235.31.229
+ssh -i ~/.ssh/school ubuntu@34.204.201.220
