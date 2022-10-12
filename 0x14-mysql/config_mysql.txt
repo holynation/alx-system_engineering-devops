@@ -1,0 +1,97 @@
+-- -------------------------- TASK 1 ----------------------------------
+
+-- login to your mysql cli if installed and enter password if required
+mysql -u root -p 
+
+-- create a user 'holberton_user', the password 'projectcorrection280hbtn' on localhost
+CREATE USER 'holberton_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'projectcorrection280hbtn';
+
+-- grant privileges to that user 'holberton_user'
+-- GRANT ALL PRIVILEGES ON *.* TO 'holberton_user'@'localhost' WITH GRANT OPTION;
+GRANT REPLICATION CLIENT ON *.* TO 'holberton_user'@'localhost';
+
+-- clearing the memory and cahce
+FLUSH PRIVILEGES;
+
+-- exiting mysql cli
+exit;
+
+-- run the below command on your server web-01 and web-02 to test the user created
+-- the output should show that the privileges was granted, check the examle given
+mysql -uholberton_user -p -e "SHOW GRANTS FOR 'holberton_user'@'localhost'"
+
+
+-- --------------- TASK 2 ------------------------------
+
+-- login back to the mysql cli
+mysql -u root -p 
+
+ -- mysql command to create at least a database with a table having a row
+ -- on the primary MySQL
+create database if not exists tyrell_corp;
+
+-- connect to the database created
+use tyrell_corp;
+
+-- create a table name nexus6
+create table if not exists nexus6(
+	id int not null auto_increment primary key,
+	name varchar(255) not null
+);
+
+-- insert data into the table
+insert into nexus6(name) values('Leon');
+
+-- grant select privilige to all tables for the user if not granted already
+GRANT select on tyrell_corp.* to 'holberton_user'@'localhost';
+
+
+-- ---------------------- TASK 3 -----------------------------------
+
+-- NOTE: the below code should be run on the primary MYSQL server(web-01) ONLY
+-- create another user replica_user on host '%'
+CREATE USER 'replica_user'@'%' IDENTIFIED WITH mysql_native_password BY 'projectcorrection280hbtn';
+
+-- grant permission to the user 'replica_user'
+GRANT REPLICATION SLAVE ON *.* TO 'replica_user'@'%';
+
+-- grant select privilige to all tables for the user if not granted already
+GRANT select on mysql.user to 'holberton_user'@'localhost';
+
+-- clear the cache and memory
+FLUSH PRIVILEGES;
+
+-- exit from mysql cli
+exit;
+
+-- run on the server
+mysql -uholberton_user -p -e 'SELECT user, Repl_slave_priv FROM mysql.user'
+
+
+-- ----------------------- TASK 4 ------------------------------
+
+-- this article guide is useful for all configuration
+-- https://www.digitalocean.com/community/tutorials/how-to-set-up-replication-in-mysql
+
+ssh ubuntu@web-01-ipaddress
+sudo ufw allow from 3.235.244.129 to any port 3306
+sudo cp /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld_backup.cnf
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+FLUSH TABLES WITH READ LOCK;
+SHOW MASTER STATUS;
+
+-- file: mysql-bin.000001 position: 154
+
+-- cat ~/.ssh/id_rsa.pub | ssh ubuntu@3.235.244.129 "mkdir -p ~/.ssh && touch ~/.ssh/authorized_keys && chmod -R go= ~/.ssh && cat >> ~/.ssh/authorized_keys"
+
+-- mysql command to complete replica
+CHANGE MASTER TO
+MASTER_HOST='34.204.201.220',
+MASTER_USER='replica_user',
+MASTER_PASSWORD='projectcorrection280hbtn',
+MASTER_LOG_FILE='mysql-bin.000004',
+MASTER_LOG_POS=154;
+
+
+
+
