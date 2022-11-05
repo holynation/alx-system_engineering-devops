@@ -5,7 +5,7 @@ Query Reddit API recursively for all hot articles of a given subreddit
 import requests
 
 
-def recurse(subreddit, hot_list=[], after="tmp"):
+def recurse(subreddit, hot_list=[], after="tmp", count=0):
     """
         return all hot articles for a given subreddit
         return None if invalid subreddit given
@@ -21,17 +21,22 @@ def recurse(subreddit, hot_list=[], after="tmp"):
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     if after != "tmp":
         url = url + "?after={}".format(after)
-    r = requests.get(url, headers=headers, allow_redirects=False)
+    r = requests.get(url, headers=headers,
+                     allow_redirects=False).json()
 
+    # validate the data in the parameters
+    if "data" not in subreddit_info and hot_list == []:
+        return None
     # append top titles to hot_list
-    results = r.json().get('data', {}).get('children', [])
+    results = r.get('data', {}).get('children', [])
     if not results:
         return hot_list
     for e in results:
         hot_list.append(e.get('data').get('title'))
+        count += 1
 
     # get next param "after" else nothing else to recurse
-    after = r.json().get('data').get('after')
+    after = r.get('data').get('after')
     if not after:
         return hot_list
-    return (recurse(subreddit, hot_list, after))
+    return (recurse(subreddit, hot_list, after, count))
