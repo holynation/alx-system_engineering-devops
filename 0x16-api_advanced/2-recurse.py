@@ -25,7 +25,7 @@ def recurse(subreddit, hot_list=[], after="tmp", count=0):
                      allow_redirects=False).json()
 
     # validate the data in the parameters
-    if "data" not in subreddit_info and hot_list == []:
+    if "data" not in r and hot_list == []:
         return None
     # append top titles to hot_list
     results = r.get('data', {}).get('children', [])
